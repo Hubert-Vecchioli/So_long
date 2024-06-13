@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:24 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/13 16:35:17 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:45:52 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_init_map(t_game *game)
 	game->map->content = NULL;
 	game->map->row_size = 0;
 	game->map->col_size = 0;
+	game->map->fd = 0;
 }
 
 void	ft_init_fix_images(t_game *game)

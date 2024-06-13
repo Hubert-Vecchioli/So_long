@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 02:55:47 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/13 12:56:36 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:24:08 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*ft_clean(char *line, t_buffer *buffer, size_t line_len, char to_find)
 	if (ft_strchr(line, to_find, line_len) == 0)
 		result_len = line_len;
 	else
-		result_len = ft_strchr(line, to_find, line_len);
+		result_len = ft_strchr(line, to_find, line_len) - 1;
 	result = malloc(sizeof(char) * (result_len + 1));
 	if (!result)
 		return (free(line), NULL);

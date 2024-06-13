@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:55:56 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/13 16:30:59 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/13 16:45:45 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_mov_game_images
 
 typedef struct s_map
 {
+	int		fd;
 	char	**content;
 	int		row_size;
 	int		col_size;

@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:44:40 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/13 14:53:13 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:29:28 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	ft_review_input(int ac, char **av)
 		ft_error('i');
 	if (!ft_strstr(av[1], ".ber"))
 		ft_error('b');
+}
+
+void	ft_review_game(t_game *game)
+{
+	
 }
 
 // check the map has the need artefacts (1 E, 1+ c, 1P)

@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 02:56:07 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/05/27 13:17:18 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:22:05 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #  define BUFFER_SIZE 0
 # endif
 
-# define MAX_FD 1024
+# define MAX_FD 64
 
 # include <stdlib.h>
 # include <unistd.h>
