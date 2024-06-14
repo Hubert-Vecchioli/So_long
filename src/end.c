@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:51 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/14 14:51:47 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:53:46 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,18 @@ void	ft_free(t_game *game)
 	}
 }
 
-void	ft_free_map(char **map)
+void	ft_free_map(char **split)
 {
-	
+	int	i;
+
+	i = 0;
+	if (split)
+	{
+		while (split[i])
+		{
+			free(split[i]);
+			i++;
+		}
+		free(split);
+	}
 }
