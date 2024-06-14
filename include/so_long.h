@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:55:56 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/13 16:45:45 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/14 10:29:34 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ typedef struct s_game
 	t_map				*map;
 	t_fix_game_images	*images;
 	t_mov_game_images	*player;
+	void				*frame_init_ptr;
+	void				*frame_ptr;
+	int					frame_height;
+	int					frame_width;
 }	t_game;
 
 #endif

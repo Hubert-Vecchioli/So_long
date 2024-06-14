@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:44:40 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/13 17:29:28 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:19:04 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,133 @@ void	ft_review_input(int ac, char **av)
 		ft_error('b');
 }
 
-void	ft_review_game(t_game *game)
+int	ft_review_game(t_game *game)
 {
-	
+	if (ft_count_elem(game->map->content, 'E') != 1)
+		return(ft_free(game), ft_error('e'), 0);
+	if (ft_count_elem(game->map->content, 'P') != 1)
+		return(ft_free(game), ft_error('p'), 0);
+	if (ft_count_elem(game->map->content, 'C') < 1)
+		return(ft_free(game), ft_error('c'), 0);
+	if (ft_check_rectangle_wall(game) != 1)
+		return (ft_free(game), ft_error('r'), 0);
+	if (ft_check_map_is_doable(game) != 1)
+		return (ft_free(game), ft_error('s'), 0);
+	return (1);
 }
 
-// check the map has the need artefacts (1 E, 1+ c, 1P)
-// check the map is a rectangle
-// surronded by walls
-// check the map is doable and all the collectible are reachable
+int	ft_count_elem(char **content, char c)
+{
+	int	i;
+	int	j;
+	int	res;
+
+	i = 0;
+	res = 0;
+	while (content[i])
+	{
+		j = 0;
+		while (content[i][j])
+		{
+			if (content[i][j] == c)
+				res += 1;
+			j++; 
+		}
+		i++;
+	}
+	return (res);
+}
+
+int	ft_check_rectangle_wall(t_game *game)
+{
+	int	j;
+
+	j = -1;
+	while (game->map->content[0][++j] == '1')
+	{}
+	if (game->map->row_size != j)
+		return (0);
+	j = -1;
+	while (game->map->content[game->map->row_size - 1][++j] == '1')
+	{}
+	if (game->map->row_size != j)
+		return (0);
+	j = -1;
+	while (game->map->content[++j][0] == '1')
+	{}
+	if (game->map->col_size != j)
+		return (0);
+	j = -1;
+	while (game->map->content[++j][game->map->col_size - 1] == '1')
+	{}
+	if (game->map->col_size != j)
+		return (0);
+	return (1);
+}
+
+int	ft_check_map_is_doable(t_game *game)
+{
+	char	**content_copy;
+	int		*pos_P;
+	content_copy = ft_strcontentdup(game);
+	pos_P = ft_find_position(game, 'P');
+	ft_flood_map(game, &content_copy, pos_P);
+	if (ft_count_elem(content_copy, 'E') != 0 || ft_count_elem(content_copy, 'C') != 0 )
+		return (ft_free_map(content_copy), 0);
+	return (ft_free_map(content_copy), 1);
+}
+
+char	**ft_strcontentdup(t_game *game)
+{
+	char **content_copy;
+	int	i;
+	
+	i = 0;
+	content_copy = malloc(sizeof(char *) * (game->map->col_size + 1));
+	if (content_copy == NULL)
+		return (ft_free(game), ft_error('m'), NULL);
+	while (i < game->map->col_size)
+	{
+		content_copy[i] = ft_strdup(game->map->content[i]);
+		//mid copy malloc failure ft_free_map
+	}
+	return (content_copy);
+}
+
+void ft_flood_map(t_game *game, char **content_copy, int pos_x, int pos_y)
+{
+	if (pos_y < 0 || pos_y >= game->map->col_size || pos_x < 0 || pos_x >= game->map->col_size || ((content_copy[pos_x][pos_y] != 1) && (content_copy[pos_x][pos_y] != 'E')))
+		return;
+	content_copy[pos_x][pos_y] = '1';
+	ft_flood_map(game, content_copy, pos_x - 1, pos_y);
+	ft_flood_map(game, content_copy, pos_x + 1, pos_y);
+	ft_flood_map(game, content_copy, pos_x, pos_y - 1);
+	ft_flood_map(game, content_copy, pos_x, pos_y + 1);
+}
+
+int	*ft_find_position(t_game *game, char c)
+{
+	int	i;
+	int	j;
+	int	res[2];
+
+	i = 0;
+	res[0] = -1;
+	res[1] = -1;
+	while (game->map->content[i])
+	{
+		j = 0;
+		while (game->map->content[i][j])
+		{
+			if (game->map->content[i][j] == c)
+			{
+				res[0] = i;
+				res[1] = j;
+				return (res);
+			}
+			j++; 
+		}
+		i++;
+	}
+	return (res);
+}

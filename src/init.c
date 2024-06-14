@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:24 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/13 16:45:52 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/14 10:31:22 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	ft_init_game(t_game *game)
 	ft_init_map(game);
 	ft_init_fix_images(game);
 	ft_init_mov_images(game);
+	game->frame_height = NULL;
+	game->frame_ptr = NULL;
+	game->frame_height = 0;
+	game->frame_width = 0;
 }
 
 void	ft_init_map(t_game *game)
