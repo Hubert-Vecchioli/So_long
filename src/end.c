@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:51 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/14 14:18:14 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:51:47 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 // function to end
 
 // function to free
-
-// example from push swp:
 void	ft_error(char err)
 {
 	ft_putstr_fd("Error\n", 2);
@@ -38,6 +36,10 @@ void	ft_error(char err)
 		ft_putstr_fd("Wrong map, no rectangular wall surrounding\n", 2);
 	else if (err == 's')
 		ft_putstr_fd("Wrong map with no solution\n", 2);
+	else if (err == 'x')
+		ft_putstr_fd("Minilibx failure\n", 2);
+	else if (err == 'w')
+		ft_putstr_fd("You won!\n", 2);
 	exit(0);
 }
 
