@@ -6,16 +6,11 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:23:04 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/17 18:54:07 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/17 18:57:18 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	ft_window_close(t_game *game)
-{
-	return(ft_free(game), ft_close(), 0);
-}
 
 int	ft_on_keypress(int keycode, t_game *game)
 {
@@ -32,10 +27,9 @@ int	ft_on_keypress(int keycode, t_game *game)
 		ft_player_move(game, game->player->pos_y, \
 		game->player->pos_x + 1, 4); //TO UPDATE
 	if (keycode == KEY_Q || keycode == KEY_ESC)
-		return (on_window_close(game));
+		return (ft_free(game), ft_close(), 0);
 	return (0);
 }
-
 
 int	ft_player_move(t_game *game, int y, int x, int direction)
 {
@@ -59,12 +53,6 @@ int	ft_player_move(t_game *game, int y, int x, int direction)
 		game->map->content[y][x] = 'P';
 		game->player->count_actions++;
 	}
-	game->player->direction = direction;
+	game->player->last_direction = direction;
 	ft_render(game);
-}
-
-
-int	on_window_close(t_game *game)
-{
-	return (*(int *)ft_exit(game, LEAVE, NULL));
 }
