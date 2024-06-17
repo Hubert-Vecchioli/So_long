@@ -1,4 +1,4 @@
-#include "minilibx_opengl/mlx.h"
+#include "mlx-linux/mlx.h"
 #include <stdio.h>
 #include <stdlib.h>
 

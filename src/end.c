@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:51 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/17 08:03:36 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/17 18:43:49 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,24 @@ void	ft_error(char err)
 		ft_putstr_fd("Minilibx failure\n", 2);
 	else if (err == 'w')
 		ft_putstr_fd("You won!\n", 2);
+	exit(0);
+}
+
+void	ft_loose(void)
+{
+	ft_putstr_fd("You lost! Try again.\n", 2);
+	exit(0);
+}
+
+void	ft_close(void)
+{
+	ft_putstr_fd("You left... See you soon!\n", 2);
+	exit(0);
+}
+
+void	ft_win(void)
+{
+	ft_putstr_fd("You won!\n", 2);
 	exit(0);
 }
 

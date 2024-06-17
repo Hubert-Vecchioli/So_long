@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:44:40 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/14 14:19:04 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/17 18:39:57 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ int	ft_check_rectangle_wall(t_game *game)
 int	ft_check_map_is_doable(t_game *game)
 {
 	char	**content_copy;
-	int		*pos_P;
+	
 	content_copy = ft_strcontentdup(game);
-	pos_P = ft_find_position(game, 'P');
-	ft_flood_map(game, &content_copy, pos_P);
+	game->player->pos_x = ft_find_position_row(game, 'P');
+	game->player->pos_y = ft_find_position_col(game, 'P');
+	ft_flood_map(game, content_copy, game->player->pos_x, game->player->pos_y);
 	if (ft_count_elem(content_copy, 'E') != 0 || ft_count_elem(content_copy, 'C') != 0 )
 		return (ft_free_map(content_copy), 0);
 	return (ft_free_map(content_copy), 1);
@@ -113,7 +114,7 @@ char	**ft_strcontentdup(t_game *game)
 	return (content_copy);
 }
 
-void ft_flood_map(t_game *game, char **content_copy, int pos_x, int pos_y)
+void	ft_flood_map(t_game *game, char **content_copy, int pos_x, int pos_y)
 {
 	if (pos_y < 0 || pos_y >= game->map->col_size || pos_x < 0 || pos_x >= game->map->col_size || ((content_copy[pos_x][pos_y] != 1) && (content_copy[pos_x][pos_y] != 'E')))
 		return;
@@ -124,15 +125,12 @@ void ft_flood_map(t_game *game, char **content_copy, int pos_x, int pos_y)
 	ft_flood_map(game, content_copy, pos_x, pos_y + 1);
 }
 
-int	*ft_find_position(t_game *game, char c)
+int	ft_find_position_row(t_game *game, char c)
 {
 	int	i;
 	int	j;
-	int	res[2];
 
 	i = 0;
-	res[0] = -1;
-	res[1] = -1;
 	while (game->map->content[i])
 	{
 		j = 0;
@@ -140,13 +138,33 @@ int	*ft_find_position(t_game *game, char c)
 		{
 			if (game->map->content[i][j] == c)
 			{
-				res[0] = i;
-				res[1] = j;
-				return (res);
+				return (j);
 			}
 			j++; 
 		}
 		i++;
 	}
-	return (res);
+	return (-1);
+}
+
+int	ft_find_position_col(t_game *game, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map->content[i])
+	{
+		j = 0;
+		while (game->map->content[i][j])
+		{
+			if (game->map->content[i][j] == c)
+			{
+				return (i);
+			}
+			j++; 
+		}
+		i++;
+	}
+	return (-1);
 }
