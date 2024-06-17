@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:36:44 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/14 14:44:57 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/16 22:02:00 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,18 @@ int	ft_init_mlb(t_game *game)
 
 int	ft_init_images(t_game *game)
 {
+	game->images->wall = ft_init_image(game, "./assets/wall.xpm");
+	game->images->free_space = ft_init_image(game, "./assets/free_space.xpm");
+	game->images->collectible = ft_init_image(game, "./assets/collectible.xpm");
+	game->images->exit = ft_init_image(game, "./assets/exit.xpm");
+	game->images->enemy = ft_init_image(game, "./assets/enemy.xpm");
+	game->player->player_front =  ft_init_image(game, "./assets/player_front.xpm");
+	game->player->player_right =  ft_init_image(game, "./assets/player_right.xpm");
+	game->player->player_left =  ft_init_image(game, "./assets/player_left.xpm");
+	game->player->player_back =  ft_init_image(game, "./assets/player_back.xpm");
+}
 
+t_image	*ft_init_image(t_game *game, char *path)
+{
+	
 }

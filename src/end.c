@@ -6,15 +6,12 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:51 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/14 14:53:46 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/17 08:03:36 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// function to end
-
-// function to free
 void	ft_error(char err)
 {
 	ft_putstr_fd("Error\n", 2);
@@ -33,9 +30,9 @@ void	ft_error(char err)
 	else if (err == 'c')
 		ft_putstr_fd("Wrong number of collectible\n", 2);
 	else if (err == 'r')
-		ft_putstr_fd("Wrong map, no rectangular wall surrounding\n", 2);
+		ft_putstr_fd("Wrong map: no rectangular wall surrounding\n", 2);
 	else if (err == 's')
-		ft_putstr_fd("Wrong map with no solution\n", 2);
+		ft_putstr_fd("Wrong map: no solution\n", 2);
 	else if (err == 'x')
 		ft_putstr_fd("Minilibx failure\n", 2);
 	else if (err == 'w')

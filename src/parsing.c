@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:00:16 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/14 13:17:09 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/15 11:36:34 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ char *ft_get_map_content(char **av, t_game *game)
 	if (game->map->content == NULL)
 		return (ft_free(game), ft_error('m'), NULL);
 	i = 0;
-	game->map->content[i] = get_next_line(game->map->fd)
-	while(game->map->content[i])
+	game->map->content[i] = get_next_line(game->map->fd);
+	while (game->map->content[i])
 	{
 		game->map->content[++i] = get_next_line(game->map->fd)
 		//protect GNL failures check si [0] = NULL

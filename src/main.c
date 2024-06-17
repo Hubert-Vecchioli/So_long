@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:55:32 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/14 14:52:09 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/17 08:01:34 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int main(int ac, char **av)
 	ft_parse_game(av[1], &game);
 	ft_review_game(&game);
 	ft_init_mlb(&game);
-	ft_init_images(&game); // TODO
+	ft_init_images(&game); // WIP
 	// generate screen
-	// get inputs & impact the game
-	return (ft_free(game), ft_error('w'))
+	// get inputs via the hook
+	mlx_loop(game.frame_init_ptr);
+	return (ft_free(game), ft_error('w'));
 }
