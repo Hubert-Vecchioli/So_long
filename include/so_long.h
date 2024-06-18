@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:55:56 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/18 16:48:34 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:11:18 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,34 @@
 typedef struct s_image
 {
 	void		*ptr;
-	char		*addr;
-	int			bits_per_pixel;
 	int			size_x;
 	int			size_y;
-	int			size_line;
-	int			endian;
+	// int			size_line;
+	// int			endian;
+	// char		*addr;
+	// int			bits_per_pixel;
 }	t_image;
 
 typedef struct s_fix_game_images
 {
-	t_image	*free_space;
-	t_image	*wall;
-	t_image	*collectible;
-	t_image	*enemy;
-	t_image	*exit_open;	
-	t_image	*exit_closed;	
+	t_image	free_space;
+	t_image	wall;
+	t_image	collectible;
+	t_image	enemy;
+	t_image	exit_open;	
+	t_image	exit_closed;	
 }	t_fix_game_images;
 
 typedef struct s_mov_game_images
 {
-	t_image	*player_front;
-	t_image	*player_right;
-	t_image	*player_left;
-	t_image	*player_back;
+	t_image	player_front;
+	t_image	player_right;
+	t_image	player_left;
+	t_image	player_back;
 	int		pos_x;
 	int		pos_y;
 	char	last_direction;
 	int		count_actions;
-	int		health_points;
 }	t_mov_game_images;
 
 typedef struct s_map
@@ -101,7 +100,6 @@ int			ft_init_fix_images(t_game *game);
 int			ft_init_mov_images(t_game *game);
 int			ft_init_mlb(t_game *game);
 int			ft_render(t_game *game);
-int			ft_render_life(t_game *game);
 int			ft_render_movements(t_game *game);
 int			ft_review_game(t_game *game);
 int			ft_count_elem(char **content, char c);
@@ -113,7 +111,6 @@ int			ft_parse_game(char **av, t_game *game);
 t_image		ft_init_image(t_game *game, char *path);
 void		ft_init_images(t_game *game);
 void		ft_init_game(t_game *game);
-void		ft_render_interface(t_game *game);
 void		ft_render_sprite(t_game *game, t_image sprite, int line, int column);
 void		ft_get_sprite(t_game *game, int y, int x);
 void		ft_render_player(t_game *game, int y, int x);

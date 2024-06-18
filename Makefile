@@ -2,11 +2,11 @@
 #so_long
 NAME = so_long
 
-SRC 		= checks.c end.c game_actions.c init.c main.c mlb_actions.c parsing.c render_interface.c render.c utils.c
+SRC 		= checks.c end.c game_actions.c init.c main.c mlb_actions.c parsing.c render.c utils.c
 SRCS_DIR 		= ./src/
 SRCS 			= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS			=  ${SRCS:.c=.o}
-FLAGS       = -Wall -Wextra -Imlx -I ./include -I$(LIBFT_DIR) #-Werror
+FLAGS       = -Wall -Wextra -Werror -Imlx -I ./include -I$(LIBFT_DIR)
 
 
 # Remember to implement your rules...
