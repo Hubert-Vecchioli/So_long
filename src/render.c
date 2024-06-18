@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:40:04 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/17 18:52:09 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/18 13:32:43 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_get_sprite(t_game *game, int y, int x)
 		else
 			ft_render_sprite(game, *game->images->exit_closed, y, x);
 	}
-	else if (value == 'E')
+	else if (value == 'V')
 		ft_render_sprite(game, *game->images->enemy, y, x);
 	else if (value == 'P')
 		ft_render_player(game, y, x);

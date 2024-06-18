@@ -6,11 +6,16 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:23:04 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/17 18:57:18 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/18 13:36:19 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	ft_window_close(t_game *game)
+{
+	return (ft_free(game), ft_close(), 0);
+}
 
 int	ft_on_keypress(int keycode, t_game *game)
 {
@@ -40,9 +45,9 @@ int	ft_player_move(t_game *game, int y, int x, int direction)
 	prev_y = game->player->pos_y;
 	if (game->map->content[y][x] == 'E' && ft_count_elem(game->map->content, 'C') < 1)
 		return (ft_free(game), ft_win(), 1);
-	else if (game->map->content[y][x] == 'E')
+	else if (game->map->content[y][x] == 'V')
 		return (ft_free(game), ft_loose(), 0);
-	else if (is_valid_move(game, game->map->content, x, y) \
+	else if (ft_is_valid_mvt(game, game->map->content, x, y) \
 		&& game->map->content[y][x] != 'E')
 	{
 		game->map->content[prev_y][prev_x] = '0';
@@ -55,4 +60,14 @@ int	ft_player_move(t_game *game, int y, int x, int direction)
 	}
 	game->player->last_direction = direction;
 	ft_render(game);
+	return (1);
+}
+
+int	ft_is_valid_mvt(t_game *game, char **content, int x, int y)
+{
+	return (x >= 0
+		&& x < game->map->row_size
+		&& y >= 0
+		&& y < game->map->col_size
+		&& content[y][x] != '1');
 }

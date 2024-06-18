@@ -6,11 +6,11 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 02:55:47 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/13 17:24:08 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:27:44 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 char	*get_next_line(int fd)
 {
@@ -28,7 +28,7 @@ char	*get_next_line(int fd)
 	if (line == NULL)
 		return (NULL);
 	buffer[fd].size = ft_max(1, buffer[fd].size);
-	while (buffer[fd].size > 0 && ft_strchr(line, '\n', line_len) == 0)
+	while (buffer[fd].size > 0 && ft_strchr_oth(line, '\n', line_len) == 0)
 	{
 		buffer[fd].size = read(fd, buffer[fd].content, BUFFER_SIZE);
 		if (buffer[fd].size > 0)
@@ -53,7 +53,7 @@ char	*ft_bfrjoin(char *line, t_buffer *buffer, size_t line_len)
 	size_t		i;
 
 	if (line_len + (*buffer).size == 0)
-		return (calloc(1, sizeof(char)));
+		return (free(line), ft_calloc(1, sizeof(char)));
 	result = malloc((line_len + (*buffer).size) * sizeof(char));
 	if (!result)
 		return (free(line), NULL);
@@ -72,7 +72,7 @@ char	*ft_bfrjoin(char *line, t_buffer *buffer, size_t line_len)
 	return (result);
 }
 
-int	ft_strchr(char *str, char to_find, size_t line_len)
+int	ft_strchr_oth(char *str, char to_find, size_t line_len)
 {
 	size_t	i;
 
@@ -95,10 +95,10 @@ char	*ft_clean(char *line, t_buffer *buffer, size_t line_len, char to_find)
 	size_t	result_len;
 	size_t	i;
 
-	if (ft_strchr(line, to_find, line_len) == 0)
+	if (ft_strchr_oth(line, to_find, line_len) == 0)
 		result_len = line_len;
 	else
-		result_len = ft_strchr(line, to_find, line_len) - 1;
+		result_len = ft_strchr_oth(line, to_find, line_len);
 	result = malloc(sizeof(char) * (result_len + 1));
 	if (!result)
 		return (free(line), NULL);
@@ -107,9 +107,12 @@ char	*ft_clean(char *line, t_buffer *buffer, size_t line_len, char to_find)
 		result[i] = line[i];
 	i--;
 	result[result_len] = 0;
+	if (ft_strchr_oth(line, to_find, line_len) != 0)
+		result[result_len - 1] = 0;
 	while (++i < line_len)
 		(*buffer).content[i - result_len] = line[i];
 	(*buffer).size = line_len - result_len;
 	free(line);
 	return (result);
 }
+

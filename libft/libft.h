@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 01:01:54 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/05/20 01:41:12 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:22:01 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,25 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+
+# if BUFFER_SIZE < 0
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE 0
+# endif
+
+# define MAX_FD 64
+
+# include <stdlib.h>
+# include <unistd.h>
+
+typedef struct s_buffer
+{
+	char	content[BUFFER_SIZE];
+	ssize_t	size;
+}	t_buffer;
 
 typedef struct s_list
 {
@@ -22,6 +41,11 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+char	*get_next_line(int fd);
+char	*ft_clean(char *line, t_buffer *buffer, size_t line_len, char to_find);
+char	*ft_bfrjoin(char *line, t_buffer *buffer, size_t line_len);
+int		ft_strchr_oth(char *str, char to_find, size_t line_len);
+size_t	ft_max(size_t a, size_t b);
 char	*ft_itoa(int n);
 char	*ft_strchr(const char *str, int to_find);
 char	*ft_strrchr(const char *str, int to_find);

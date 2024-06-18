@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:44:40 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/17 18:39:57 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:18:26 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,22 @@ int	ft_check_rectangle_wall(t_game *game)
 	j = -1;
 	while (game->map->content[0][++j] == '1')
 	{}
-	if (game->map->row_size != j)
+	if (game->map->col_size != j)
 		return (0);
 	j = -1;
 	while (game->map->content[game->map->row_size - 1][++j] == '1')
 	{}
+	if (game->map->col_size != j)
+		return (0);
+	j = 0;
+	while (game->map->content[j] && game->map->content[j][0] == '1')
+		j = j + 1;
 	if (game->map->row_size != j)
 		return (0);
-	j = -1;
-	while (game->map->content[++j][0] == '1')
-	{}
-	if (game->map->col_size != j)
-		return (0);
-	j = -1;
-	while (game->map->content[++j][game->map->col_size - 1] == '1')
-	{}
-	if (game->map->col_size != j)
+	j = 0;
+	while (game->map->content[j] && game->map->content[j][game->map->col_size - 1] == '1')
+		j = j + 1;
+	if (game->map->row_size != j)
 		return (0);
 	return (1);
 }
@@ -89,10 +89,10 @@ int	ft_check_map_is_doable(t_game *game)
 	char	**content_copy;
 	
 	content_copy = ft_strcontentdup(game);
-	game->player->pos_x = ft_find_position_row(game, 'P');
-	game->player->pos_y = ft_find_position_col(game, 'P');
+	game->player->pos_y = ft_find_position_row(game, 'P');
+	game->player->pos_x = ft_find_position_col(game, 'P');
 	ft_flood_map(game, content_copy, game->player->pos_x, game->player->pos_y);
-	if (ft_count_elem(content_copy, 'E') != 0 || ft_count_elem(content_copy, 'C') != 0 )
+	if (ft_count_elem(content_copy, 'C') != 0)
 		return (ft_free_map(content_copy), 0);
 	return (ft_free_map(content_copy), 1);
 }
@@ -103,20 +103,22 @@ char	**ft_strcontentdup(t_game *game)
 	int	i;
 	
 	i = 0;
-	content_copy = malloc(sizeof(char *) * (game->map->col_size + 1));
+	content_copy = malloc(sizeof(char *) * (game->map->row_size + 1));
 	if (content_copy == NULL)
 		return (ft_free(game), ft_error('m'), NULL);
-	while (i < game->map->col_size)
+	while (i < game->map->row_size)
 	{
 		content_copy[i] = ft_strdup(game->map->content[i]);
+		i++;
 		//mid copy malloc failure ft_free_map
 	}
+	content_copy[i] = 0;
 	return (content_copy);
 }
 
 void	ft_flood_map(t_game *game, char **content_copy, int pos_x, int pos_y)
 {
-	if (pos_y < 0 || pos_y >= game->map->col_size || pos_x < 0 || pos_x >= game->map->col_size || ((content_copy[pos_x][pos_y] != 1) && (content_copy[pos_x][pos_y] != 'E')))
+	if (pos_y < 0 || pos_y >= game->map->col_size || pos_x < 0 || pos_x >= game->map->col_size || (content_copy[pos_x][pos_y] == '1') || (content_copy[pos_x][pos_y] == 'V') || (content_copy[pos_x][pos_y] == 'E'))
 		return;
 	content_copy[pos_x][pos_y] = '1';
 	ft_flood_map(game, content_copy, pos_x - 1, pos_y);
