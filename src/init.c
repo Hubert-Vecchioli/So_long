@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:24 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/19 12:28:31 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:38:19 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 /// INIT IMAGES
 void	ft_init_game(t_game *game)
 {
-	ft_init_map(game);
-	ft_init_fix_images(game);
-	ft_init_mov_images(game);
 	game->frame_init_ptr = NULL;
 	game->frame_ptr = NULL;
 	game->frame_height = 0;
 	game->frame_width = 0;
+	game->player = NULL;
+	ft_init_map(game);
+	ft_init_fix_images(game);
+	ft_init_mov_images(game);
 }
 
 int	ft_init_map(t_game *game)
@@ -45,8 +46,11 @@ int	ft_init_fix_images(t_game *game)
 	game->images->wall.ptr = NULL;
 	game->images->collectible.ptr = NULL;
 	game->images->enemy.ptr = NULL;
+	game->images->enemy_animated.ptr = NULL;
 	game->images->exit_open.ptr = NULL;
 	game->images->exit_closed.ptr = NULL;
+	game->images->enemy_to_display = 0;
+	game->images->enemy_speed = 0;
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:23:04 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/19 12:36:07 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:11:09 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_on_keypress(int keycode, t_game *game)
 	if (keycode == KEY_D || keycode == KEY_ARROW_RIGHT)
 		ft_player_move(game, game->player->pos_x, \
 		game->player->pos_y + 1, 4);
+	ft_render_movements(game, 1);
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		return (ft_free(game), ft_close(), 0);
 	return (0);

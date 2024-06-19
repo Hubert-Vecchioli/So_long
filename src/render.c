@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:40:04 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/19 12:36:25 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:10:16 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_render_sprite(t_game *game, t_image sprite, int line, int column)
 
 void	ft_get_sprite(t_game *game, int y, int x)
 {
-	char	value;
+	char		value;
 
 	value = game->map->content[y][x];
 	if (value == '1')
@@ -40,7 +40,7 @@ void	ft_get_sprite(t_game *game, int y, int x)
 			ft_render_sprite(game, game->images->exit_closed, y, x);
 	}
 	else if (value == 'V')
-		ft_render_sprite(game, game->images->enemy, y, x);
+		ft_get_animated_enemy(game, y, x);
 	else if (value == 'P')
 		ft_render_player(game, y, x);
 }
@@ -59,7 +59,7 @@ void	ft_render_player(t_game *game, int y, int x)
 		ft_render_sprite (game, game->player->player_right, y, x);
 }
 
-int	ft_render_movements(t_game *game)
+int	ft_render_movements(t_game *game, int i)
 {
 	char	*movements;
 	char	*phrase;
@@ -68,8 +68,11 @@ int	ft_render_movements(t_game *game)
 	if (!movements)
 		return (ft_free(game), ft_error('m'), 0);
 	phrase = ft_strjoin("Movements : ", movements);
-	ft_putstr_fd(phrase, 1);
-	ft_putchar_fd('\n', 1);
+	if (i)
+	{
+		ft_putstr_fd(phrase, 1);
+		ft_putchar_fd('\n', 1);
+	}
 	if (!phrase)
 		return (ft_free(game), ft_error('m'), 0);
 	mlx_set_font(game->frame_init_ptr, game->frame_ptr, "10*20");
@@ -96,6 +99,5 @@ int	ft_render(t_game *game)
 		}
 		y++;
 	}
-	ft_render_movements(game);
 	return (0);
 }

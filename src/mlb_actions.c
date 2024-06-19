@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 14:36:44 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/19 12:33:15 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:53:53 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,21 @@ int	ft_init_mlb(t_game *game)
 
 void	ft_init_images(t_game *game)
 {
-	game->images->wall = ft_init_image(game, "./images/wall.xpm");
-	game->images->free_space = ft_init_image(game, "./images/floor.xpm");
-	game->images->collectible = ft_init_image(game, "./images/collectible.xpm");
-	game->images->exit_closed = ft_init_image(game, "./images/exit_closed.xpm");
-	game->images->exit_open = ft_init_image(game, "./images/exit_open.xpm");
-	game->images->enemy = ft_init_image(game, "./images/enemy.xpm");
-	game->player->player_front = ft_init_image(game, "./images/player.xpm");
-	game->player->player_right = ft_init_image(game, "./images/player_r.xpm");
-	game->player->player_left = ft_init_image(game, "./images/player_l.xpm");
-	game->player->player_back = ft_init_image(game, "./images/player_back.xpm");
+	game->images->wall = ft_init_image(game, "./textures/wall.xpm");
+	game->images->free_space = ft_init_image(game, "./textures/floor.xpm");
+	game->images->collectible = ft_init_image(game,
+			"./textures/collectible.xpm");
+	game->images->exit_closed = ft_init_image(game,
+			"./textures/exit_closed.xpm");
+	game->images->exit_open = ft_init_image(game, "./textures/exit_open.xpm");
+	game->images->enemy = ft_init_image(game, "./textures/enemy.xpm");
+	game->images->enemy_animated = ft_init_image(game,
+			"./textures/enemy_animated.xpm");
+	game->player->player_front = ft_init_image(game, "./textures/player.xpm");
+	game->player->player_right = ft_init_image(game, "./textures/player_r.xpm");
+	game->player->player_left = ft_init_image(game, "./textures/player_l.xpm");
+	game->player->player_back = ft_init_image(game,
+			"./textures/player_back.xpm");
 }
 
 t_image	ft_init_image(t_game *game, char *path)

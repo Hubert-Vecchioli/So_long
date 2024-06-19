@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 14:50:23 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/19 12:27:55 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:15:18 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,30 @@ void	ft_free_map(char **split)
 		}
 		free(split);
 	}
+}
+
+void	ft_get_animated_enemy(t_game *game, int y, int x)
+{
+	if (game->images->enemy_to_display
+		>= ft_count_elem(game->map->content, 'V'))
+	{
+		ft_render_sprite (game, game->images->enemy, y, x);
+		game->images->enemy_to_display++;
+		if (game->images->enemy_to_display
+			> ft_count_elem(game->map->content, 'V') * 2 - 1)
+			game->images->enemy_to_display = 0;
+	}
+	else
+	{
+		ft_render_sprite(game, game->images->enemy_animated, y, x);
+		game->images->enemy_to_display++;
+	}
+}
+
+int	ft_animated(t_game *game)
+{
+	ft_render(game);
+	ft_render_movements(game, 0);
+	usleep(300000);
+	return (0);
 }

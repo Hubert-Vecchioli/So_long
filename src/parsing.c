@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:00:16 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/19 12:42:09 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:24:23 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	ft_parse_game(char **av, t_game *game)
 	int		i;
 
 	i = ft_count_map_rows(av, game);
+	if (i <= 2)
+		return (ft_free(game), ft_error('e'), 0);
 	game->map->content = malloc(sizeof(char *) * (i + 1));
 	if (game->map->content == NULL)
 		return (ft_free(game), ft_error('m'), 0);
