@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:23:04 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/18 19:46:50 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:36:07 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,18 @@ int	ft_window_close(t_game *game)
 
 int	ft_on_keypress(int keycode, t_game *game)
 {
-	// ft_putnbr_fd(keycode,1);
 	if (keycode == KEY_W || keycode == KEY_ARROW_TOP)
 		ft_player_move(game, game->player->pos_x - 1, \
-			game->player->pos_y, 1); //TO UPDATE
+			game->player->pos_y, 1);
 	if (keycode == KEY_S || keycode == KEY_ARROW_BOT)
 		ft_player_move(game, game->player->pos_x + 1, \
-			game->player->pos_y, 2); //TO UPDATE
+			game->player->pos_y, 2);
 	if (keycode == KEY_A || keycode == KEY_ARROW_LEFT)
 		ft_player_move(game, game->player->pos_x, \
-		game->player->pos_y - 1, 3); //TO UPDATE
+		game->player->pos_y - 1, 3);
 	if (keycode == KEY_D || keycode == KEY_ARROW_RIGHT)
 		ft_player_move(game, game->player->pos_x, \
-		game->player->pos_y + 1, 4); //TO UPDATE
+		game->player->pos_y + 1, 4);
 	if (keycode == KEY_Q || keycode == KEY_ESC)
 		return (ft_free(game), ft_close(), 0);
 	return (0);
@@ -44,10 +43,11 @@ int	ft_player_move(t_game *game, int x, int y, int direction)
 
 	prev_x = game->player->pos_x;
 	prev_y = game->player->pos_y;
-	if (game->map->content[x][y] == 'E' && ft_count_elem(game->map->content, 'C') < 1)
+	if (game->map->content[x][y] == 'E'
+		&& ft_count_elem(game->map->content, 'C') < 1)
 		return (ft_free(game), ft_win(), 1);
 	else if (game->map->content[x][y] == 'V')
-		return (ft_free(game), ft_loose(), 0);
+		return (ft_free(game), ft_error('l'), 0);
 	else if (ft_is_valid_mvt(game, game->map->content, x, y) \
 		&& game->map->content[x][y] != 'E')
 	{

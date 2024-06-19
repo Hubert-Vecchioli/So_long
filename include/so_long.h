@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:55:56 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/18 19:11:18 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:56:35 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int			ft_check_map_is_doable(t_game *game);
 int			ft_player_move(t_game *game, int y, int x, int direction);
 int			ft_is_valid_mvt(t_game *game, char **content, int x, int y);
 int			ft_parse_game(char **av, t_game *game);
+int			ft_has_invalid_param(char **content);
 t_image		ft_init_image(t_game *game, char *path);
 void		ft_init_images(t_game *game);
 void		ft_init_game(t_game *game);
@@ -121,6 +122,6 @@ void		ft_win(void);
 void		ft_free(t_game *game);
 void		ft_free_map(char **split);
 void		ft_flood_map(t_game *game, char **content_copy, int pos_x, int pos_y);
-void		ft_loose(void);
+void		ft_clean_images(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:24 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/18 19:09:49 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:28:31 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_init_mov_images(t_game *game)
 	game->player->player_back.ptr = NULL;
 	game->player->count_actions = 0;
 	game->player->last_direction = 0;
-	game->player->pos_x = 0;	
+	game->player->pos_x = 0;
 	game->player->pos_y = 0;
 	return (1);
 }

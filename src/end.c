@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 12:15:51 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/18 13:17:50 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:28:10 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_error(char err)
 		ft_putstr_fd("Malloc failure\n", 2);
 	else if (err == 'o')
 		ft_putstr_fd("Open failure\n", 2);
-	else if (err == 'e')
-		ft_putstr_fd("Wrong number of exit\n", 2);	
+	else if (err == 'e' || err == 'u')
+		ft_putstr_fd("Wrong number of exit or Wrong map: Unkown param\n", 2);
 	else if (err == 'p')
 		ft_putstr_fd("Wrong number of player\n", 2);
 	else if (err == 'c')
@@ -35,14 +35,8 @@ void	ft_error(char err)
 		ft_putstr_fd("Wrong map: no solution\n", 2);
 	else if (err == 'x')
 		ft_putstr_fd("Minilibx failure\n", 2);
-	else if (err == 'w')
-		ft_putstr_fd("You won!\n", 2);
-	exit(0);
-}
-
-void	ft_loose(void)
-{
-	ft_putstr_fd("You lost! Try again.\n", 2);
+	else if (err == 'l')
+		ft_putstr_fd("You lost! Try again.\n", 2);
 	exit(0);
 }
 
@@ -62,28 +56,38 @@ void	ft_free(t_game *game)
 {
 	if (game->map)
 	{
-		//clean map
+		ft_free_map(game->map->content);
+		free(game->map);
 	}	
 	if (game->images)
 	{
-	}	
+		ft_clean_images(game);
+		free(game->images);
+	}
 	if (game->player)
+		free(game->player);
+	if (game->frame_ptr)
+		mlx_destroy_window(game->frame_init_ptr, game->frame_ptr);
+	if (game->frame_init_ptr)
 	{
+		mlx_destroy_display(game->frame_init_ptr);
+		free(game->frame_init_ptr);
 	}
 }
 
-void	ft_free_map(char **split)
+void	ft_clean_images(t_game *game)
 {
-	int	i;
-
-	i = 0;
-	if (split)
+	if (game->images->wall.ptr)
 	{
-		while (split[i])
-		{
-			free(split[i]);
-			i++;
-		}
-		free(split);
+		mlx_destroy_image(game->frame_init_ptr, game->images->wall.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->images->free_space.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->images->collectible.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->images->exit_closed.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->images->exit_open.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->images->enemy.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->player->player_front.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->player->player_right.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->player->player_left.ptr);
+		mlx_destroy_image(game->frame_init_ptr, game->player->player_back.ptr);
 	}
 }

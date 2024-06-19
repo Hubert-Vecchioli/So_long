@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:40:04 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/18 19:55:21 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:36:25 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_render_movements(t_game *game)
 	ft_putchar_fd('\n', 1);
 	if (!phrase)
 		return (ft_free(game), ft_error('m'), 0);
-	mlx_set_font(game->frame_init_ptr, game->frame_ptr,"10*20");
+	mlx_set_font(game->frame_init_ptr, game->frame_ptr, "10*20");
 	mlx_string_put(game->frame_init_ptr, game->frame_ptr, \
 		10, 20, 0xFFFFFF, phrase);
 	free(movements);

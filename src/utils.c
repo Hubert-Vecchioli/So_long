@@ -6,7 +6,7 @@
 /*   By: hvecchio <hvecchio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 14:50:23 by hvecchio          #+#    #+#             */
-/*   Updated: 2024/06/18 14:40:41 by hvecchio         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:27:55 by hvecchio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,18 @@ char	*ft_strstr(const char *str, const char *to_find)
 	return (NULL);
 }
 
-// char	*ft_strdup(const char *src)
-// {
-// 	char	*copy_str;
-// 	int		i;
+void	ft_free_map(char **split)
+{
+	int	i;
 
-// 	copy_str = (malloc((ft_strlen(src) + 1) * sizeof(char)));
-// 	if (copy_str == NULL)
-// 		return (NULL);
-// 	i = 0;
-// 	while (src[i])
-// 	{
-// 		copy_str[i] = src[i];
-// 		i++;
-// 	}
-// 	copy_str[i] = 0;
-// 	return (copy_str);
-// }
+	i = 0;
+	if (split)
+	{
+		while (split[i])
+		{
+			free(split[i]);
+			i++;
+		}
+		free(split);
+	}
+}
